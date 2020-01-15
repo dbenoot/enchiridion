@@ -16,7 +16,18 @@ package main
 
 import "fmt"
 
-func searchEntry(dir, v bool, text string, tag string, ingredients string) {
+func searchEntry(dir string, v bool, text string, tag string, ingredients string) {
+
+	// load all the recipes
+
+	recipes := loadRecipes(dir)
+
+	for _, v := range recipes {
+		for _, i := range v.Ingredients{
+			ingList[i] = 
+		}
+	}
+
 	fmt.Println(dir)
 	fmt.Println(v)
 	fmt.Println(text)

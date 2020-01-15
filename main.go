@@ -41,12 +41,6 @@ func main() {
 
 	dir := setWorkDir()
 
-	// load all the recipes
-
-	recipes := loadRecipes(dir)
-
-	fmt.Println(recipes)
-
 	// Define all of the commands
 
 	createCommand := flag.NewFlagSet("create", flag.ExitOnError)
