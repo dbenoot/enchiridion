@@ -15,6 +15,8 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"strings"
 )
 
@@ -43,10 +45,20 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 
 		// search for all ingredients in the recipe. Only full matches!
 
-		if subslice(strings.Split(ingredients, " "), il) == true && ubslice(strings.Split(tag, " "), tl) == true {
+		if (len(ingredients) == 0 || subslice(strings.Split(ingredients, " "), il) == true) && (len(tag) == 0) || subslice(strings.Split(tag, " "), tl) == true {
 			result = appendIfMissing(result, v.Title)
 		}
 
+		// TEXT
+		// loop over result and remove unsuitable records
+
+		/* 		for r  := range result {
+			if !strings.Contains(v.Body, text) {
+				result, _ = remove(result, r)
+			}
+		} */
+
+		fmt.Println(result)
 	}
 }
 
@@ -61,6 +73,16 @@ func subslice(s1 []string, s2 []string) bool {
 	}
 	return true
 }
+
+/* func contains(s []string, e string) bool {
+	for _, a := range s {
+		if !strings.Contains(a, e) {
+			fmt.Println(a, e)
+			return false
+		}
+	}
+	return true
+} */
 
 func contains(s []string, e string) bool {
 	for _, a := range s {
@@ -78,4 +100,11 @@ func appendIfMissing(slice []string, i string) []string {
 		}
 	}
 	return append(slice, i)
+}
+
+func remove(s []string, index int) ([]string, error) {
+	if index >= len(s) {
+		return nil, errors.New("Out of Range Error")
+	}
+	return append(s[:index], s[index+1:]...), nil
 }
