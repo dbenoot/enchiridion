@@ -13,14 +13,14 @@ import (
 )
 
 type Recipe struct {
-	Title       string
-	Preptime    int
-	Cooktime    int
-	Image       string
-	Origin      string
-	Tags        []string
-	Ingredients []string
-	Body        string
+	Title       string            `yaml:"title"`
+	Preptime    int               `yaml:"preptime"`
+	Cooktime    int               `yaml:"cooktime"`
+	Image       string            `yaml:"image"`
+	Origin      string            `yaml:"origin"`
+	Tags        []string          `yaml:"tags"`
+	Ingredients map[string]string `yaml:"ingredients"`
+	Body        string            `yaml:"body"`
 }
 
 func main() {

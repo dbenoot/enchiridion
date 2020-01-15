@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"gopkg.in/yaml.v2"
@@ -43,7 +44,8 @@ func createEntry(wd string, title string) {
 			log.Fatalf("error: %v", err)
 		}
 
-		content := "---\n" + string(d) + "\n---\n"
+		frontmatter := strings.Replace(string(d), "body: \"\"", "", -1)
+		content := "---\n" + frontmatter + "\n---\n"
 
 		// write the file
 
