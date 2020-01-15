@@ -15,11 +15,12 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 )
 
 func searchEntry(dir string, v bool, text string, tag string, ingredients string) {
+
+	var result []string
 
 	// load all the recipes
 
@@ -27,17 +28,23 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 
 	for _, v := range recipes {
 
-		var il []string
+		// INGREDIENTS
+		// get a list of all the ingredients of this particular recipe
 
+		var il []string
 		for j := range v.Ingredients {
 			il = append(il, j)
 		}
 
-		// search for ingredients
-		fmt.Println(strings.Split(ingredients, " "))
-		fmt.Println(il)
-		if subslice(strings.Split(ingredients, " "), il) == true {
-			fmt.Println(v.Title)
+		var tl []string
+		for _, k := range v.Tags {
+			tl = append(tl, k)
+		}
+
+		// search for all ingredients in the recipe. Only full matches!
+
+		if subslice(strings.Split(ingredients, " "), il) == true && ubslice(strings.Split(tag, " "), tl) == true {
+			result = appendIfMissing(result, v.Title)
 		}
 
 	}
@@ -62,4 +69,13 @@ func contains(s []string, e string) bool {
 		}
 	}
 	return false
+}
+
+func appendIfMissing(slice []string, i string) []string {
+	for _, ele := range slice {
+		if ele == i {
+			return slice
+		}
+	}
+	return append(slice, i)
 }
