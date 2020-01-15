@@ -1,4 +1,16 @@
-// Legalese
+//   Copyright 2020 The enchiridion Authors
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 
 package main
 
@@ -40,6 +52,12 @@ func main() {
 	createCommand := flag.NewFlagSet("create", flag.ExitOnError)
 	titleCreateFlag := createCommand.String("title", "DEFAULT TITLE", "Give a title to your recipe.")
 
+	searchCommand := flag.NewFlagSet("search", flag.ExitOnError)
+	verboseSearchFlag := searchCommand.Bool("v", false, "Set the output verbosity. Default is false.")
+	textSearchFlag := searchCommand.String("text", "", "Search text. Default is empty.")
+	tagSearchFlag := searchCommand.String("tag", "", "Search for entries with a specific tag. Default is empty.")
+	ingredientSearchFlag := searchCommand.String("ingredient", "", "Search for entries with a specific ingredient. Default is empty.")
+
 	// Input Switch
 
 	if len(os.Args) == 1 {
@@ -55,8 +73,8 @@ func main() {
 			createCommand.Parse(os.Args[2:])
 		// case "render":
 		// 	renderCommand.Parse(os.Args[2:])
-		// case "search":
-		// 	searchCommand.Parse(os.Args[2:])
+		case "search":
+			searchCommand.Parse(os.Args[2:])
 		// case "tag":
 		// 	tagCommand.Parse(os.Args[2:])
 		// case "stat":
@@ -74,6 +92,10 @@ func main() {
 
 	if createCommand.Parsed() {
 		createEntry(dir, *titleCreateFlag)
+	}
+
+	if searchCommand.Parsed() {
+		searchEntry(dir, *verboseSearchFlag, *textSearchFlag, *tagSearchFlag, *ingredientSearchFlag)
 	}
 }
 
