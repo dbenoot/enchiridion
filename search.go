@@ -14,7 +14,10 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func searchEntry(dir string, v bool, text string, tag string, ingredients string) {
 
@@ -23,14 +26,40 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 	recipes := loadRecipes(dir)
 
 	for _, v := range recipes {
-		for _, i := range v.Ingredients{
-			ingList[i] = 
+
+		var il []string
+
+		for j := range v.Ingredients {
+			il = append(il, j)
+		}
+
+		// search for ingredients
+		fmt.Println(strings.Split(ingredients, " "))
+		fmt.Println(il)
+		if subslice(strings.Split(ingredients, " "), il) == true {
+			fmt.Println(v.Title)
+		}
+
+	}
+}
+
+func subslice(s1 []string, s2 []string) bool {
+	if len(s1) > len(s2) {
+		return false
+	}
+	for _, e := range s1 {
+		if !contains(s2, e) {
+			return false
 		}
 	}
+	return true
+}
 
-	fmt.Println(dir)
-	fmt.Println(v)
-	fmt.Println(text)
-	fmt.Println(tag)
-	fmt.Println(ingredients)
+func contains(s []string, e string) bool {
+	for _, a := range s {
+		if a == e {
+			return true
+		}
+	}
+	return false
 }
