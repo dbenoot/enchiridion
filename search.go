@@ -45,8 +45,10 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 
 		// search for all ingredients in the recipe. Only full matches!
 
-		if (len(ingredients) == 0 || subslice(strings.Split(ingredients, " "), il) == true) && (len(tag) == 0) || subslice(strings.Split(tag, " "), tl) == true {
-			result = appendIfMissing(result, v.Title)
+		if len(ingredients) == 0 || subslice(strings.Split(ingredients, " "), il) == true {
+			if (len(tag) == 0) || subslice(strings.Split(tag, " "), tl) == true {
+				result = appendIfMissing(result, v.Title)
+			}
 		}
 
 		// TEXT
