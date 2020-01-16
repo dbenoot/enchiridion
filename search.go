@@ -47,19 +47,21 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 
 		if len(ingredients) == 0 || subslice(strings.Split(ingredients, " "), il) == true {
 			if (len(tag) == 0) || subslice(strings.Split(tag, " "), tl) == true {
-				result = appendIfMissing(result, v.Title)
+				if (len(tag) == 0) || subslice(strings.Split(text, " "), strings.Split(v.Body, " ")) == true {
+					result = appendIfMissing(result, v.Title)
+				}
 			}
 		}
 
 		// TEXT
 		// loop over result and remove unsuitable records
 
-		for r := range result {
-			if !strings.Contains(v.Body, text) {
-				result, _ = remove(result, r)
-				r--
-			}
-		}
+		// for r := range result {
+		// 	if strings.Contains(v.Body, text) {
+		// 		result, _ = remove(result, r)
+		// 		r--
+		// 	}
+		// }
 
 	}
 
