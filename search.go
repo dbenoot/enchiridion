@@ -47,7 +47,7 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 
 		if len(ingredients) == 0 || subslice(strings.Split(ingredients, " "), il) == true {
 			if (len(tag) == 0) || subslice(strings.Split(tag, " "), tl) == true {
-				if (len(tag) == 0) || subslice(strings.Split(text, " "), strings.Split(v.Body, " ")) == true {
+				if (len(text) == 0) || subslice(strings.Split(text, " "), strings.Split(v.Body, " ")) == true {
 					result = appendIfMissing(result, v.Title)
 				}
 			}
