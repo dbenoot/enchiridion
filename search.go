@@ -52,14 +52,16 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 		// TEXT
 		// loop over result and remove unsuitable records
 
-		/* 		for r  := range result {
+		for r := range result {
 			if !strings.Contains(v.Body, text) {
 				result, _ = remove(result, r)
 			}
-		} */
+		}
 
-		fmt.Println(result)
 	}
+
+	fmt.Println(result)
+
 }
 
 func subslice(s1 []string, s2 []string) bool {
