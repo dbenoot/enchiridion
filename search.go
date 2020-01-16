@@ -57,6 +57,7 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 		for r := range result {
 			if !strings.Contains(v.Body, text) {
 				result, _ = remove(result, r)
+				r--
 			}
 		}
 
