@@ -76,24 +76,24 @@ func subslice(s1 []string, s2 []string) bool {
 	return true
 }
 
-/* func contains(s []string, e string) bool {
-	for _, a := range s {
-		if !strings.Contains(a, e) {
-			fmt.Println(a, e)
-			return false
-		}
-	}
-	return true
-} */
-
 func contains(s []string, e string) bool {
 	for _, a := range s {
-		if a == e {
+		if strings.Contains(a, e) {
+			fmt.Println(a, e)
 			return true
 		}
 	}
 	return false
 }
+
+// func contains(s []string, e string) bool {
+// 	for _, a := range s {
+// 		if a == e {
+// 			return true
+// 		}
+// 	}
+// 	return false
+// }
 
 func appendIfMissing(slice []string, i string) []string {
 	for _, ele := range slice {
