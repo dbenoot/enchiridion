@@ -37,7 +37,7 @@ func createEntry(wd string, title string) {
 	t := time.Now()
 
 	filename := t.Format("20060102") + "_" + title + ".md"
-	file := filepath.Join(wd, filename)
+	file := filepath.Join(wd, "recipes", filename)
 
 	// Create the markdown file as YYYYMMDD_title.md
 

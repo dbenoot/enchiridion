@@ -46,6 +46,15 @@ func main() {
 	createCommand := flag.NewFlagSet("create", flag.ExitOnError)
 	titleCreateFlag := createCommand.String("title", "DEFAULT TITLE", "Give a title to your recipe.")
 
+	bookCommand := flag.NewFlagSet("collate", flag.ExitOnError)
+	bookSelectFlag := bookCommand.String("book", "DEFAULT TITLE", "Select cookbook.")
+	bookAddFlag := bookCommand.String("add", "DEFAULT TITLE", "Select recipe to add to book.")
+	bookRemoveFlag := bookCommand.String("remove", "DEFAULT TITLE", "Select recipe to remove from book.")
+
+	renderCommand := flag.NewFlagSet("render", flag.ExitOnError)
+	bookFlag := renderCommand.String("book", "DEFAULT TITLE", "Select book to render.")
+	recipeFlag := renderCommand.String("recipe", "DEFAULT TITLE", "Select recipe to render.")
+
 	searchCommand := flag.NewFlagSet("search", flag.ExitOnError)
 	verboseSearchFlag := searchCommand.Bool("v", false, "Set the output verbosity. Default is false.")
 	textSearchFlag := searchCommand.String("text", "", "Search text. Default is empty.")
@@ -65,10 +74,12 @@ func main() {
 		switch os.Args[1] {
 		case "create":
 			createCommand.Parse(os.Args[2:])
-		// case "render":
-		// 	renderCommand.Parse(os.Args[2:])
+		case "render":
+			renderCommand.Parse(os.Args[2:])
 		case "search":
 			searchCommand.Parse(os.Args[2:])
+		case "collate":
+			bookCommand.Parse(os.Args[2:])
 		// case "tag":
 		// 	tagCommand.Parse(os.Args[2:])
 		// case "stat":
@@ -91,6 +102,15 @@ func main() {
 	if searchCommand.Parsed() {
 		searchEntry(dir, *verboseSearchFlag, *textSearchFlag, *tagSearchFlag, *ingredientSearchFlag)
 	}
+
+	if bookCommand.Parsed() {
+		parseBook(dir, *bookSelectFlag, *bookAddFlag, *bookRemoveFlag)
+	}
+
+	if renderCommand.Parsed() {
+		render(*bookFlag, *recipeFlag)
+	}
+
 }
 
 func setWorkDir() string {

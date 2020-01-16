@@ -34,7 +34,7 @@ const (
 func loadRecipes(dir string) []Recipe {
 	var R []Recipe
 
-	files, err := getFileList(dir)
+	files, err := getFileList(filepath.Join(dir, "recipes"))
 
 	for _, v := range files {
 		recipe := Recipe{}
