@@ -72,6 +72,8 @@ func main() {
 		// define command switch
 
 		switch os.Args[1] {
+		case "init":
+			initEnchiridion(dir)
 		case "create":
 			createCommand.Parse(os.Args[2:])
 		case "render":
