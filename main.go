@@ -116,19 +116,12 @@ func main() {
 }
 
 func setWorkDir() string {
+
 	usr, err := user.Current()
 	check(err)
 
 	sd := filepath.Join(usr.HomeDir, ".enchiridion")
 	cfgFile := filepath.Join(sd, "config.ini")
-
-	if _, err := os.Stat(cfgFile); os.IsNotExist(err) {
-		_ = os.MkdirAll(sd, 0755)
-		os.Create(cfgFile)
-		var cfg, _ = ini.LooseLoad(cfgFile)
-		_, _ = cfg.Section("general").NewKey("home", "")
-		err = cfg.SaveTo(cfgFile)
-	}
 
 	var cfg, _ = ini.LooseLoad(cfgFile)
 
