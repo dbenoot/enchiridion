@@ -96,6 +96,7 @@ func initTemplate(filename string, filecontent string, dir string) {
 
 var templ = map[string]string{
 	"book.html":       "",
+	"page.html":       "",
 	"printlayout.css": "",
 }
 
