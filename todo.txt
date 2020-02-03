@@ -1,24 +1,24 @@
 GLOBAL
 
-set recipe folder
-run from everywhere
++ set recipe folder
++ run from everywhere
 
 RECIPES
 
-recipe in markdown
-frontmatter contains 
-title
-preptime
-cooktime
-ingredients (multiple list should be supported, with a subtitle then, eg. Sauce and Main dish ingredients in separate lists)
-e.g. 'egg @ 2', 'flour @ 500 grammes' 
++ recipe in markdown
++ frontmatter contains 
++ title
++ preptime
++ cooktime
++ ingredients (multiple list should be supported, with a subtitle then, eg. Sauce and Main dish ingredients in separate lists)
++ e.g. 'egg @ 2', 'flour @ 500 grammes' 
 
-body contains body
++ body contains body
 
 SEARCH 
 
-search on title and ingredients
-search on multiple ingredients
++ search on title and ingredients
+TODO search on multiple ingredients
 
 BOOK
 
