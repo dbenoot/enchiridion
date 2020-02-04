@@ -118,7 +118,7 @@ func main() {
 	}
 
 	if renderCommand.Parsed() {
-		render(*bookFlag, *recipeFlag)
+		render(dir, *bookFlag, *recipeFlag)
 	}
 
 }
