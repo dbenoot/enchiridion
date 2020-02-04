@@ -20,7 +20,7 @@ import (
 	"strings"
 )
 
-func searchEntry(dir string, v bool, text string, tag string, ingredients string) {
+func searchEntry(dir string, v bool, text string, tag string, ingredients string, title string) {
 
 	var result []string
 
@@ -35,18 +35,21 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 		var il, tl []string
 
 		for j := range v.Ingredients {
-			il = append(il, j)
+			il = append(il, strings.ToLower(j))
 		}
 
 		for _, k := range v.Tags {
-			tl = append(tl, k)
+			tl = append(tl, strings.ToLower(k))
 		}
+
 		// search for all ingredients & tags in the recipe. Only full matches!
 
-		if len(ingredients) == 0 || subslice(strings.Split(ingredients, " "), il) == true {
-			if (len(tag) == 0) || subslice(strings.Split(tag, " "), tl) == true {
-				if (len(text) == 0) || subslice(strings.Split(text, " "), strings.Split(v.Body, " ")) == true {
-					result = appendIfMissing(result, v.Title)
+		if len(ingredients) == 0 || subslice(strings.Split(strings.ToLower(ingredients), " "), il) == true {
+			if (len(tag) == 0) || subslice(strings.Split(strings.ToLower(tag), " "), tl) == true {
+				if (len(text) == 0) || subslice(strings.Split(strings.ToLower(text), " "), strings.Split(strings.ToLower(v.Body), " ")) == true {
+					if (len(title) == 0) || subslice(strings.Split(strings.ToLower(title), " "), strings.Split(strings.ToLower(v.Title), " ")) == true {
+						result = appendIfMissing(result, v.Title)
+					}
 				}
 			}
 		}

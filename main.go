@@ -57,6 +57,7 @@ func main() {
 
 	searchCommand := flag.NewFlagSet("search", flag.ExitOnError)
 	verboseSearchFlag := searchCommand.Bool("v", false, "Set the output verbosity. Default is false.")
+	titleSearchFlag := searchCommand.String("title", "", "Search text in title. Default is empty.")
 	textSearchFlag := searchCommand.String("text", "", "Search text. Default is empty.")
 	tagSearchFlag := searchCommand.String("tag", "", "Search for entries with a specific tag. Default is empty.")
 	ingredientSearchFlag := searchCommand.String("ingredient", "", "Search for entries with a specific ingredient. Default is empty.")
@@ -102,7 +103,7 @@ func main() {
 	}
 
 	if searchCommand.Parsed() {
-		searchEntry(dir, *verboseSearchFlag, *textSearchFlag, *tagSearchFlag, *ingredientSearchFlag)
+		searchEntry(dir, *verboseSearchFlag, *textSearchFlag, *tagSearchFlag, *ingredientSearchFlag, *titleSearchFlag)
 	}
 
 	if bookCommand.Parsed() {

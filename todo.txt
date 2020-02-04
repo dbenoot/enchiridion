@@ -17,8 +17,8 @@ RECIPES
 
 SEARCH 
 
-+ search on title and ingredients
-TODO search on multiple ingredients
++ search on title, text, tag and ingredients
++ search on multiple search items
 
 BOOK
 
