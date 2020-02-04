@@ -30,20 +30,18 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 
 	for _, v := range recipes {
 
-		// INGREDIENTS
-		// get a list of all the ingredients of this particular recipe
+		// get a list of all the ingredients & tags of this particular recipe
 
-		var il []string
+		var il, tl []string
+
 		for j := range v.Ingredients {
 			il = append(il, j)
 		}
 
-		var tl []string
 		for _, k := range v.Tags {
 			tl = append(tl, k)
 		}
-
-		// search for all ingredients in the recipe. Only full matches!
+		// search for all ingredients & tags in the recipe. Only full matches!
 
 		if len(ingredients) == 0 || subslice(strings.Split(ingredients, " "), il) == true {
 			if (len(tag) == 0) || subslice(strings.Split(tag, " "), tl) == true {
@@ -59,6 +57,7 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 }
 
 func subslice(s1 []string, s2 []string) bool {
+
 	if len(s1) > len(s2) {
 		return false
 	}
