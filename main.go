@@ -35,6 +35,13 @@ type Recipe struct {
 	Body        string            `yaml:"body"`
 }
 
+type Book struct {
+	Title    string   `yaml:"title"`
+	Author   string   `yaml:"author"`
+	Coverpic string   `yaml:"coverpic"`
+	Recipes  []string `yaml:"recipes"`
+}
+
 func main() {
 
 	// central ini file which sets the workdir -> makes it possible to run exec from everywhere
@@ -83,12 +90,12 @@ func main() {
 			searchCommand.Parse(os.Args[2:])
 		case "collate":
 			bookCommand.Parse(os.Args[2:])
-		// case "tag":
-		// 	tagCommand.Parse(os.Args[2:])
-		// case "stat":
-		// 	statistics(diary.wd, tStr)
-		// case "help":
-		// 	printHelp()
+			// case "tag":
+			// 	tagCommand.Parse(os.Args[2:])
+			// case "stat":
+			// 	statistics(diary.wd, tStr)
+		case "help":
+			fmt.Println("Common command are init, create, search, collate and render.")
 		default:
 			fmt.Printf("%q is not valid command.\n", os.Args[1])
 			fmt.Println("Use the help command 'enchiridion help' for help.")

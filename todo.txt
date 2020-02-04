@@ -10,7 +10,7 @@ RECIPES
 + title
 + preptime
 + cooktime
-+ ingredients (multiple list should be supported, with a subtitle then, eg. Sauce and Main dish ingredients in separate lists)
++ ingredients
 + e.g. 'egg @ 2', 'flour @ 500 grammes' 
 
 + body contains body

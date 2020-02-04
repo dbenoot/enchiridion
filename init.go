@@ -104,4 +104,5 @@ var dirs = []string{
 	"templates",
 	filepath.Join("recipes", "images"),
 	"rendered",
+	"books",
 }
