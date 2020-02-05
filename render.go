@@ -98,12 +98,20 @@ func render(dir string, b string, r string) {
 
 	// render book
 
+	var cover string
+	if _, err := os.Stat(filepath.Join(dir, "recipes", "images", cookbook.Coverpic)); !os.IsNotExist(err) {
+		_, err = copy(filepath.Join(dir, "recipes", "images", cookbook.Coverpic), filepath.Join(dir, "rendered", b, "images", cookbook.Coverpic))
+		check(err)
+
+		cover = "<img src=\"" + filepath.Join("images", cookbook.Coverpic) + "\"/>"
+	}
+
 	tb, err := template.ParseFiles(filepath.Join(dir, "templates", "book.html"))
 	check(err)
 
 	u := bytes.NewBufferString("")
 
-	tb.Execute(u, map[string]interface{}{"author": cookbook.Author, "coverpic": cookbook.Coverpic, "title": cookbook.Title, "pages": template.HTML(html.UnescapeString(body))})
+	tb.Execute(u, map[string]interface{}{"author": cookbook.Author, "coverpic": template.HTML(cover), "title": cookbook.Title, "pages": template.HTML(html.UnescapeString(body))})
 
 	// write u to file
 
