@@ -1,10 +1,15 @@
 <section class="chapter" id="html-h-1">
     
-    <img src={{.recipeimage}}>
+    {{.recipeimage}}
     
     <h1>{{.recipetitle}}</h1>
+    <h2>Preparation time: {{.preptime}} - Cooking time: {{.cooktime}}</h2>
+    <h3>Origin: {{.origin}}</h3>
+    <h3>Tags: {{.tags}}</h3>
     
+    <!-- <div class="sidebar"> -->
     <p class="sidenote">{{.recipeingredients}}</p>
-    
+    <!-- </div> -->
+
     <p>{{.recipebody}}</p>
 </section>
