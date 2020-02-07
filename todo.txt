@@ -10,7 +10,7 @@ RECIPES
 + title
 + preptime
 + cooktime
-+ ingredients
++ ingredients (go get -u github.com/elliotchance/orderedmap)
 + e.g. 'egg @ 2', 'flour @ 500 grammes' 
 
 + body contains body
