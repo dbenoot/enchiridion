@@ -15,9 +15,7 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -35,20 +33,22 @@ func loadRecipes(dir string) []Recipe {
 	var R []Recipe
 
 	files, err := getFileList(filepath.Join(dir, "recipes"))
+	check(err)
 
 	for _, v := range files {
 		recipe := Recipe{}
 
 		content, err := ioutil.ReadFile(v)
+		check(err)
 
 		front, body := getFront(content)
 
 		err = yaml.Unmarshal([]byte(front), &recipe)
-		if err != nil {
-			log.Fatalf("error: %v", err)
-		}
+		// if err != nil {
+		// 	log.Fatalf("YAML loading error: %v", err)
+		// }
+		check(err)
 
-		recipe.Filename = v
 		recipe.Body = body
 
 		R = append(R, recipe)
@@ -98,12 +98,13 @@ func filterFile(f []string, wd string) []string {
 	for _, file := range f {
 		if r.MatchString(file) { //&& strings.Contains(file, ".md") {
 			fo = append(fo, file)
-		} else {
-			fi, _ := os.Stat(file)
-			if fi.Mode().IsRegular() == true {
-				fmt.Printf("File was not included in the filterlist %s. Please check filterFile function. \n", file)
-			}
-		}
+		} 
+		// else {
+		// 	fi, _ := os.Stat(file)
+		// 	if fi.Mode().IsRegular() == true {
+		// 		fmt.Printf("File was not included in the filterlist %s. Please check filterFile function. \n", file)
+		// 	}
+		//}
 	}
 
 	return fo

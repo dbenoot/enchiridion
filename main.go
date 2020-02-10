@@ -25,7 +25,6 @@ import (
 )
 
 type Recipe struct {
-	Filename    string
 	Title       string            `yaml:"title"`
 	Preptime    int               `yaml:"preptime"`
 	Cooktime    int               `yaml:"cooktime"`

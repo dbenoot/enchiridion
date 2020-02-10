@@ -18,6 +18,7 @@ func render(dir string, b string, r string) {
 
 	var body string
 	var selectedRecipes []Recipe
+	lookupFilename := make(map[string]string)
 
 	// Load all recipes
 
@@ -50,6 +51,25 @@ func render(dir string, b string, r string) {
 		}
 	}
 
+	// Check if we need this file for the recipes
+
+	files, err := getFileList(filepath.Join(dir, "recipes"))
+	check(err)
+
+	for _, v := range files {
+		recipe := Recipe{}
+
+		content, err := ioutil.ReadFile(v)
+		check(err)
+
+		front, _ := getFront(content)
+
+		err = yaml.Unmarshal([]byte(front), &recipe)
+		check(err)
+		
+		lookupFilename[recipe.Title] = v
+
+	}
 	// render body
 
 	t, err := template.ParseFiles(filepath.Join(dir, "templates", "page.html"))
@@ -65,7 +85,7 @@ func render(dir string, b string, r string) {
 
 		m := yaml.MapSlice{}
 
-		content, err := ioutil.ReadFile(v.Filename)
+		content, err := ioutil.ReadFile(lookupFilename[v.Title])
 		front, _ := getFront(content)
 
 		err = yaml.Unmarshal([]byte(front), &m)
