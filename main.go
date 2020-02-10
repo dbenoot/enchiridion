@@ -135,6 +135,8 @@ func setWorkDir() string {
 	var cfg, _ = ini.LooseLoad(cfgFile)
 
 	if len(cfg.Section("general").Key("home").String()) == 0 {
+		_ = os.MkdirAll(sd, 0755)
+			os.Create(cfgFile)
 		fmt.Printf("Home directory not set, please add to config.ini. Config file is located here: %s \n", sd)
 		os.Exit(2)
 	}
