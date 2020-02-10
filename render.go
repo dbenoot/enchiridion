@@ -63,10 +63,25 @@ func render(dir string, b string, r string) {
 
 		// preprocess the ingredientslist to a table
 
+		m := yaml.MapSlice{}
+
+		content, err := ioutil.ReadFile(v.Filename)
+		front, _ := getFront(content)
+
+		err = yaml.Unmarshal([]byte(front), &m)
+		check(err)
+
+		yamlVals, _ := m[6].Value.(yaml.MapSlice)
+
 		var ing = "<table>"
-		for k, v := range v.Ingredients {
-			ing = ing + "<tr><td>" + k + "</td><td>" + v + "</td></tr>"
+
+		for _, kv := range yamlVals {
+			yamlKey, _ := kv.Key.(string)
+			// fmt.Println(yamlKey, v.Ingredients[yamlKey])
+
+			ing = ing + "<tr><td>" + yamlKey + "</td><td>" + v.Ingredients[yamlKey] + "</td></tr>"
 		}
+
 		ing = ing + "</table>"
 
 		// get image path

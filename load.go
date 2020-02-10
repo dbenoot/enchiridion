@@ -48,6 +48,7 @@ func loadRecipes(dir string) []Recipe {
 			log.Fatalf("error: %v", err)
 		}
 
+		recipe.Filename = v
 		recipe.Body = body
 
 		R = append(R, recipe)
