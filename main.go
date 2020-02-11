@@ -68,6 +68,7 @@ func main() {
 	textSearchFlag := searchCommand.String("text", "", "Search text. Default is empty.")
 	tagSearchFlag := searchCommand.String("tag", "", "Search for entries with a specific tag. Default is empty.")
 	ingredientSearchFlag := searchCommand.String("ingredient", "", "Search for entries with a specific ingredient. Default is empty.")
+	authorSearchFlag := searchCommand.String("author", "", "Search for entries from a specific author. Default is empty.")
 
 	// Input Switch
 
@@ -110,7 +111,7 @@ func main() {
 	}
 
 	if searchCommand.Parsed() {
-		searchEntry(dir, *verboseSearchFlag, *textSearchFlag, *tagSearchFlag, *ingredientSearchFlag, *titleSearchFlag)
+		searchEntry(dir, *verboseSearchFlag, *textSearchFlag, *tagSearchFlag, *ingredientSearchFlag, *titleSearchFlag, *authorSearchFlag)
 	}
 
 	if bookCommand.Parsed() {
@@ -135,12 +136,12 @@ func setWorkDir() string {
 
 	if len(cfg.Section("general").Key("home").String()) == 0 {
 		_ = os.MkdirAll(sd, 0755)
-			os.Create(cfgFile)
-			var cfg, err = ini.LooseLoad(cfgFile)
-			check(err)
-			_, err = cfg.Section("general").NewKey("home", "")
-			check(err)
-			err = cfg.SaveTo(cfgFile)
+		os.Create(cfgFile)
+		var cfg, err = ini.LooseLoad(cfgFile)
+		check(err)
+		_, err = cfg.Section("general").NewKey("home", "")
+		check(err)
+		err = cfg.SaveTo(cfgFile)
 		fmt.Printf("Home directory not set, please add to config.ini. Config file is located here: %s \n", sd)
 		os.Exit(2)
 	}

@@ -20,7 +20,7 @@ import (
 	"strings"
 )
 
-func searchEntry(dir string, v bool, text string, tag string, ingredients string, title string) {
+func searchEntry(dir string, v bool, text string, tag string, ingredients string, title string, author string) {
 
 	var result []string
 
@@ -48,7 +48,9 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 			if (len(tag) == 0) || subslice(strings.Split(strings.ToLower(tag), " "), tl) == true {
 				if (len(text) == 0) || subslice(strings.Split(strings.ToLower(text), " "), strings.Split(strings.ToLower(v.Body), " ")) == true {
 					if (len(title) == 0) || subslice(strings.Split(strings.ToLower(title), " "), strings.Split(strings.ToLower(v.Title), " ")) == true {
-						result = appendIfMissing(result, v.Title)
+						if (len(author) == 0) || subslice(strings.Split(strings.ToLower(author), " "), strings.Split(strings.ToLower(v.Origin), " ")) == true {
+							result = appendIfMissing(result, v.Title)
+						}
 					}
 				}
 			}
