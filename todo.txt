@@ -27,7 +27,7 @@ BOOK
 + group certain recipes in books
 + make a beautiful default layout for books, with front picture, author, etc and a selection of recipes
 + recipe page: picture at the top over the whole page, ingredients to the right on 1/3rd of page (alternate per page??) and body to the left over 2/3 of the page
-- book and page templates should go to the 
++ book and page templates should go to the book directory so we can have per-book differences
 
 RECIPES
 

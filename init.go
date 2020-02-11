@@ -94,12 +94,6 @@ func initTemplate(filename string, filecontent string, dir string) {
 	}
 }
 
-var templ = map[string]string{
-	"book.html": "\n<html>\n<head>\n<title>{{.title}}</title>\n<meta name=\"author\" content=\"{{.author}}}\"/>\n<link rel=\"stylesheet\" type=\"text/css\" href=\"book.css\"/>\n</head>\n<body>\n\n<section class=\"frontcover\">\n<img src=\"{{.coverpic}}\"/>\n<h1>{{.title}}</h1>\n</section>\n\n<section class=\"imprint\">\n<p>{{.author}}</p>\n</section>\n\n{{.pages}}\n\n</body>\n</html>",
-	"page.html": "<section class=\"chapter\" id=\"html-h-1\">\n\n\t{{.recipeimage}}\n\n\t<h1>{{.recipetitle}}</h1>\n\t<h2>Preparation time: {{.preptime}} - Cooking time: {{.cooktime}}</h2>\n\t<h3>Origin: {{.origin}}</h3>\n\t<h3>Tags: {{.tags}}</h3>\n\t<p class=\"sidenote\">{{.recipeingredients}}</p>\n\t<p>{{.recipebody}}</p>\n</section>",
-	"book.css":  "",
-}
-
 var dirs = []string{
 	"templates",
 	filepath.Join("recipes", "images"),

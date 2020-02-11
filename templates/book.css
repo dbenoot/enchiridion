@@ -24,7 +24,8 @@
    will use all of them.
 */
 
-@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+@import url('https://fonts.googleapis.com/css?family=Raleway|Yesteryear&display=swap');
 
 @page {
   margin: 27mm 16mm 27mm 16mm;
@@ -42,14 +43,14 @@
 
 @page :left {
   @top-left {
-    font: 11pt "Gill Sans", "Lato", serif;
-    /* content: "Cascading Style Sheets"; */
+    font: 11pt "Raleway", "Raleway", serif;
+    content: "Titel boek";
     vertical-align: bottom;
     padding-bottom: 2em;
   }
 
   @bottom-left {
-    font: 11pt "Gill Sans", "Lato", serif;
+    font: 11pt "Raleway", "Raleway", serif;
     content: counter(page);
     padding-top: 2em;
     vertical-align: top;
@@ -58,14 +59,14 @@
 
 @page :right {
   @top-right {
-    font: 11pt "Gill Sans", "Lato", serif;
+    font: 11pt "Raleway", "Raleway", serif;
     content: string(header, first); 
     vertical-align: bottom;
     padding-bottom: 2em; 
   }
 
   @bottom-right {
-    font: 11pt "Gill Sans", "Lato", serif;
+    font: 11pt "Raleway", "Raleway", serif;
     content: counter(page);
     text-align: right;
     vertical-align: top;
@@ -75,14 +76,14 @@
 
 @page frontmatter :left {
   @top-left {
-    font: 11pt "Gill Sans", "Lato", serif;
+    font: 11pt "Raleway", "Raleway", serif;
     content: string(title);
     vertical-align: bottom;
     padding-bottom: 2em;
   }
 
   @bottom-left {
-    font: 11pt "Gill Sans", "Lato", serif;
+    font: 11pt "Raleway", "Raleway", serif;
     content: counter(page, lower-roman);
     padding-top: 2em;
     vertical-align: top;
@@ -93,14 +94,14 @@
 
 @page frontmatter :right {
   @top-right {
-    font: 11pt "Gill Sans", "Lato", serif;
+    font: 11pt "Raleway", "Raleway", serif;
     content: string(header, first); 
     vertical-align: bottom;
     padding-bottom: 2em; 
   }
 
   @bottom-right {
-    font: 11pt "Gill Sans", "Lato", serif;
+    font: 11pt "Raleway", "Raleway", serif;
     content: counter(page, lower-roman);
     text-align: right;
     vertical-align: top;
@@ -122,7 +123,7 @@
 
 html { 
   margin: 0;
-  font: 10pt/1.26 "Gill Sans", "Lato", sans-serif;
+  font: 10pt/1.26 "Raleway", "Raleway", sans-serif;
 }
 
 body { 
@@ -130,7 +131,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 { 
-  font-family: "Gill Sans", "Lato", sans-serif;
+  font-family: "Raleway", "Raleway", sans-serif;
   margin: 2em 0 0.5em 0;
   page-break-after: avoid;
 } 
@@ -143,6 +144,7 @@ h1 {
 }
 
 .chapter h1 {
+  font-family: "Yesteryear";
   background: rgba(245,245,245, 0.8);
   padding-left: 0.25cm;
 }
@@ -471,7 +473,7 @@ code, code.css, code.value, code.declaration {
 }
 
 @media screen, handheld {
-  html { margin: 3em; font: 16px "Gill Sans", "Lato", sans-serif; }
+  html { margin: 3em; font: 16px "Raleway", "Raleway", sans-serif; }
   h1 { margin-bottom: 0.5em }
   .frontcover, .halftitlepage, .titlepage, .imprint, 
   .dedication, .foreword, .toc, .index { display: none }

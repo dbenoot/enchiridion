@@ -29,7 +29,7 @@ func render(dir string, b string, r string) {
 	var cookbook Book
 
 	filename := b + ".yaml"
-	file := filepath.Join(dir, "books", filename)
+	file := filepath.Join(dir, "books", b, filename)
 
 	if _, err := os.Stat(file); err != nil {
 		fmt.Println("Book does not exist.")
@@ -66,13 +66,13 @@ func render(dir string, b string, r string) {
 
 		err = yaml.Unmarshal([]byte(front), &recipe)
 		check(err)
-		
+
 		lookupFilename[recipe.Title] = v
 
 	}
 	// render body
 
-	t, err := template.ParseFiles(filepath.Join(dir, "templates", "page.html"))
+	t, err := template.ParseFiles(filepath.Join(dir, "books", b, "templates", "page.html"))
 	check(err)
 
 	for _, v := range selectedRecipes {
@@ -134,14 +134,16 @@ func render(dir string, b string, r string) {
 	// render book
 
 	var cover string
-	if _, err := os.Stat(filepath.Join(dir, "recipes", "images", cookbook.Coverpic)); !os.IsNotExist(err) {
-		_, err = copy(filepath.Join(dir, "recipes", "images", cookbook.Coverpic), filepath.Join(dir, "rendered", b, "images", cookbook.Coverpic))
-		check(err)
+	if len(cookbook.Coverpic) > 0 {
+		if _, err := os.Stat(filepath.Join(dir, "recipes", "images", cookbook.Coverpic)); !os.IsNotExist(err) {
+			_, err = copy(filepath.Join(dir, "recipes", "images", cookbook.Coverpic), filepath.Join(dir, "rendered", b, "images", cookbook.Coverpic))
+			check(err)
 
-		cover = "<img src=\"" + filepath.Join("images", cookbook.Coverpic) + "\"/>"
+			cover = "<img src=\"" + filepath.Join("images", cookbook.Coverpic) + "\"/>"
+		}
 	}
 
-	tb, err := template.ParseFiles(filepath.Join(dir, "templates", "book.html"))
+	tb, err := template.ParseFiles(filepath.Join(dir, "books", b, "templates", "book.html"))
 	check(err)
 
 	u := bytes.NewBufferString("")
@@ -165,7 +167,7 @@ func render(dir string, b string, r string) {
 	check(err)
 
 	if _, err := os.Stat(filepath.Join(bookdir, "book.css")); os.IsNotExist(err) {
-		_, err = copy(filepath.Join(dir, "templates", "book.css"), filepath.Join(bookdir, "book.css"))
+		_, err = copy(filepath.Join(dir, "books", b, "templates", "book.css"), filepath.Join(bookdir, "book.css"))
 		check(err)
 	}
 

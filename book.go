@@ -18,13 +18,16 @@ func parseBook(dir string, book string, ab string, rb string) {
 	// create filename
 
 	filename := book + ".yaml"
-	file := filepath.Join(dir, "books", filename)
+	file := filepath.Join(dir, "books", book, filename)
 
 	if _, err := os.Stat(file); err != nil {
-
+		_ = os.MkdirAll(filepath.Join(dir, "books", book, "templates"), 0755)
 		os.Create(file)
 		fmt.Println("Created ", file, ".")
 
+		for k := range templ {
+			_, err = copy(filepath.Join(dir, "templates", k), filepath.Join(dir, "books", book, "templates", k))
+		}
 	}
 
 	data, err := ioutil.ReadFile(file)
