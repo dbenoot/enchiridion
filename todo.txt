@@ -11,7 +11,7 @@ RECIPES
 + preptime
 + cooktime
 + ingredients (go get -u github.com/elliotchance/orderedmap)
-- make ingredients list ordered like in yaml
++ make ingredients list ordered like in yaml
 + e.g. 'egg @ 2', 'flour @ 500 grammes' 
 
 + body contains body
