@@ -97,6 +97,7 @@ func initTemplate(filename string, filecontent string, dir string) {
 var dirs = []string{
 	"templates",
 	filepath.Join("recipes", "images"),
+	filepath.Join("recipes", "templates"),
 	"rendered",
 	"books",
 }

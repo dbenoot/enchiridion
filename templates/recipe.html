@@ -1,0 +1,30 @@
+
+<html>
+    <head>
+    <title>{{.title}}</title>
+    <meta name="author" content="{{.origin}}}"/>
+    <link rel="stylesheet" type="text/css" href="book.css"/>
+    </head>
+    <body>
+     
+    <section class="chapter">
+    
+        {{.recipeimage}}
+        
+        <h1>{{.recipetitle}}</h1>
+        <h2>Preparation time: {{.preptime}} - Cooking time: {{.cooktime}}</h2>
+        <h3>Author: {{.origin}}</h3>
+        <h3>Tags: {{.tags}}</h3>
+        
+        <div class="sidebar sidenote">
+            <h2>Ingredients</h2>
+            <p >{{.recipeingredients}}</p>
+        </div>
+    
+        <p>{{.recipebody}}</p>
+    
+    </section>
+    
+    </body>
+    </html>
+    
