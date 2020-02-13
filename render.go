@@ -74,25 +74,6 @@ func render(dir string, b string, r string) {
 			}
 		}
 
-		// // Check if we need this file for the recipes
-
-		// files, err := getFileList(filepath.Join(dir, "recipes"))
-		// check(err)
-
-		// for _, v := range files {
-		// 	recipe := Recipe{}
-
-		// 	content, err := ioutil.ReadFile(v)
-		// 	check(err)
-
-		// 	front, _ := getFront(content)
-
-		// 	err = yaml.Unmarshal([]byte(front), &recipe)
-		// 	check(err)
-
-		// 	lookupFilename[recipe.Title] = v
-
-		// }
 		// render body
 
 		t, err := template.ParseFiles(filepath.Join(dir, "books", b, "templates", "page.html"))
@@ -120,8 +101,6 @@ func render(dir string, b string, r string) {
 
 			for _, kv := range yamlVals {
 				yamlKey, _ := kv.Key.(string)
-				// fmt.Println(yamlKey, v.Ingredients[yamlKey])
-
 				ing = ing + "<tr><td>" + yamlKey + "</td><td>" + v.Ingredients[yamlKey] + "</td></tr>"
 			}
 
@@ -261,9 +240,9 @@ func render(dir string, b string, r string) {
 
 		t.Execute(u, map[string]interface{}{
 			"recipetitle":       recipe.Title,
-			"recipeingredients": ing,
-			"recipeimage":       img,
-			"recipebody":        string(blackfriday.Run([]byte(recipe.Body))),
+			"recipeingredients": template.HTML(html.UnescapeString(ing)),
+			"recipeimage":       template.HTML(html.UnescapeString(img)),
+			"recipebody":        template.HTML(html.UnescapeString(string(blackfriday.Run([]byte(recipe.Body))))),
 			"preptime":          recipe.Preptime,
 			"cooktime":          recipe.Cooktime,
 			"origin":            recipe.Origin,
