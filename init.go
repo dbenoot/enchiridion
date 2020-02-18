@@ -28,6 +28,14 @@ import (
 
 func initEnchiridion(dir string) {
 
+	var templ = map[string]string{
+		filepath.Join(dir, "books", "templates", "book.html"):     "<html>\n<head>\n<title>{{.title}}</title>\n<meta name=\"author\" content=\"{{.author}}}\"/>\n<link rel=\"stylesheet\" type=\"text/css\" href=\"book.css\"/>\n</head>\n<body>\n\n<section class=\"frontcover\">\n<img src=\"{{.coverpic}}\"/>\n<h1>{{.title}}</h1>\n</section>\n\n<section class=\"imprint\">\n<p>{{.author}}</p>\n</section>\n\n{{.pages}}\n\n</body>\n</html>",
+		filepath.Join(dir, "books", "templates", "page.html"):     "<section class=\"chapter\" id=\"html-h-1\">\n\n\t{{.recipeimage}}\n\n\t<h1>{{.recipetitle}}</h1>\n\t<h2>Preparation time: {{.preptime}} - Cooking time: {{.cooktime}}</h2>\n\t<h3>Origin: {{.origin}}</h3>\n\t<h3>Tags: {{.tags}}</h3>\n\t<p class=\"sidenote\">{{.recipeingredients}}</p>\n\t<p>{{.recipebody}}</p>\n</section>",
+		filepath.Join(dir, "books", "templates", "book.css"):      "",
+		filepath.Join(dir, "recipes", "templates", "recipe.html"): "<html><head><title>{{.title}}</title><meta name=\"author\" content=\"{{.origin}}}\"/><link rel=\"stylesheet\" type=\"text/css\" href=\"recipe.css\"/></head><body><section class=\"chapter\">{{.recipeimage}}<h1>{{.recipetitle}}</h1><h2>Preparation time:{{.preptime}}- Cooking time:{{.cooktime}}</h2><h3>Author:{{.origin}}</h3><h3>Tags:{{.tags}}</h3><div class=\"sidebar sidenote\"><h2>Ingredients</h2><p>{{.recipeingredients}}</p></div><p>{{.recipebody}}</p></section></body></html>",
+		filepath.Join(dir, "recipes", "templates", "recipe.css"):  "",
+	}
+
 	if checkSiteNotExist(dir) == false {
 		fmt.Println("Directory not empty.")
 	} else {
@@ -47,7 +55,8 @@ func initEnchiridion(dir string) {
 		}
 
 		createFolders(dir)
-		createTemplates(dir)
+		createTemplates(dir, templ)
+
 		fmt.Println("Congratulations! You have initiated your new recipe book.")
 
 	}
@@ -66,7 +75,7 @@ func createFolders(dir string) {
 	}
 }
 
-func createTemplates(dir string) {
+func createTemplates(dir string, templ map[string]string) {
 	for key, value := range templ {
 		initTemplate(key, value, dir)
 	}
@@ -88,16 +97,15 @@ func isDirEmpty(name string) (bool, error) {
 }
 
 func initTemplate(filename string, filecontent string, dir string) {
-	err := ioutil.WriteFile(filepath.Join(dir, "templates", filename), []byte(filecontent), 0644)
+	err := ioutil.WriteFile(filename, []byte(filecontent), 0644)
 	if err != nil {
 		log.Fatalln(err)
 	}
 }
 
 var dirs = []string{
-	"templates",
 	filepath.Join("recipes", "images"),
 	filepath.Join("recipes", "templates"),
 	"rendered",
-	"books",
+	filepath.Join("books", "templates"),
 }

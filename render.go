@@ -265,8 +265,8 @@ func render(dir string, b string, r string) {
 		_, err = f.Write(u.Bytes())
 		check(err)
 
-		if _, err := os.Stat(filepath.Join(recipedir, "book.css")); os.IsNotExist(err) {
-			_, err = copy(filepath.Join(dir, "recipes", "templates", "book.css"), filepath.Join(recipedir, "book.css"))
+		if _, err := os.Stat(filepath.Join(recipedir, "recipe.css")); os.IsNotExist(err) {
+			_, err = copy(filepath.Join(dir, "recipes", "templates", "recipe.css"), filepath.Join(recipedir, "recipe.css"))
 			check(err)
 		}
 
