@@ -24,6 +24,7 @@ import (
 	"github.com/go-ini/ini"
 )
 
+// Recipe is a struct containing all the recipe fields
 type Recipe struct {
 	Title       string            `yaml:"title"`
 	Preptime    int               `yaml:"preptime"`
@@ -35,6 +36,7 @@ type Recipe struct {
 	Body        string            `yaml:"body"`
 }
 
+// Book is a struct containing all the book fields
 type Book struct {
 	Title    string   `yaml:"title"`
 	Author   string   `yaml:"author"`
