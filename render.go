@@ -125,7 +125,7 @@ func render(dir string, b string, r string) {
 				"preptime":          v.Preptime,
 				"cooktime":          v.Cooktime,
 				"origin":            v.Origin,
-				"tags":              v.Tags,
+				"tags":              listTags(v.Tags),
 			})
 
 			// add the rendered page to the HTML body of the book
@@ -266,8 +266,41 @@ func render(dir string, b string, r string) {
 		check(err)
 
 		if _, err := os.Stat(filepath.Join(recipedir, "recipe.css")); os.IsNotExist(err) {
-			_, err = copy(filepath.Join(dir, "recipes", "templates", "recipe.css"), filepath.Join(recipedir, "recipe.css"))
+
+			t, err := template.ParseFiles(filepath.Join(dir, "recipes", "templates", "recipe.css"))
 			check(err)
+
+			// instance a bufferstring
+
+			v := bytes.NewBufferString("")
+
+			t.Execute(v, map[string]interface{}{
+				"recipetitle":       recipe.Title,
+				"recipeingredients": template.HTML(html.UnescapeString(ing)),
+				"recipeimage":       template.HTML(html.UnescapeString(img)),
+				"recipebody":        template.HTML(html.UnescapeString(string(blackfriday.Run([]byte(recipe.Body))))),
+				"preptime":          recipe.Preptime,
+				"cooktime":          recipe.Cooktime,
+				"origin":            recipe.Origin,
+				"tags":              listTags(recipe.Tags),
+			})
+
+			recipedir := filepath.Join(dir, "rendered", "recipes", r)
+
+			if _, err := os.Stat(recipedir); os.IsNotExist(err) {
+				err = os.MkdirAll(recipedir, 0755)
+				check(err)
+			}
+
+			f, err := os.Create(filepath.Join(recipedir, "recipe.css"))
+			check(err)
+			defer f.Close()
+
+			_, err = f.Write(v.Bytes())
+			check(err)
+
+			//_, err = copy(filepath.Join(dir, "recipes", "templates", "recipe.css"), filepath.Join(recipedir, "recipe.css"))
+			//check(err)
 		}
 
 	}
