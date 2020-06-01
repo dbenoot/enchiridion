@@ -303,7 +303,6 @@ func listTags(i []string) string {
 	var o string
 
 	for k, v := range i {
-		fmt.Println(k, " - ", v)
 		if k == 0 {
 			o = o + v
 		} else {
