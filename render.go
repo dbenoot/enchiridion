@@ -246,7 +246,7 @@ func render(dir string, b string, r string) {
 			"preptime":          recipe.Preptime,
 			"cooktime":          recipe.Cooktime,
 			"origin":            recipe.Origin,
-			"tags":              recipe.Tags,
+			"tags":              listTags(recipe.Tags),
 		})
 
 		// write u to file
@@ -297,4 +297,19 @@ func copy(src, dst string) (int64, error) {
 	defer destination.Close()
 	nBytes, err := io.Copy(destination, source)
 	return nBytes, err
+}
+
+func listTags(i []string) string {
+	var o string
+
+	for k, v := range i {
+		fmt.Println(k, " - ", v)
+		if k == 0 {
+			o = o + v
+		} else {
+			o = o + ", " + v
+		}
+	}
+
+	return o
 }
