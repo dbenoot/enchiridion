@@ -57,8 +57,9 @@ func searchEntry(dir string, v bool, text string, tag string, ingredients string
 		}
 	}
 
-	fmt.Println(result)
-
+	for _, i := range result {
+		fmt.Println(i)
+	}
 }
 
 func subslice(s1 []string, s2 []string) bool {
