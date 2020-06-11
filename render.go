@@ -265,6 +265,8 @@ func render(dir string, b string, r string) {
 		_, err = f.Write(u.Bytes())
 		check(err)
 
+		// process the CSS file
+
 		if _, err := os.Stat(filepath.Join(recipedir, "recipe.css")); os.IsNotExist(err) {
 
 			t, err := template.ParseFiles(filepath.Join(dir, "recipes", "templates", "recipe.css"))
