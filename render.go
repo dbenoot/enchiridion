@@ -9,8 +9,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-
-	"gopkg.in/russross/blackfriday.v2"
+	"github.com/russross/blackfriday/v2"
+	//"gopkg.in/russross/blackfriday.v2"
 	"gopkg.in/yaml.v2"
 )
 
